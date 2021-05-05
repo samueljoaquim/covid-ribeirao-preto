@@ -33,19 +33,19 @@ table_consolidated = get_consolidated_table(table_cases, table_beds)
 print(f"""
     As seguintes variáveis estão disponíveis para análise:
 
-    * {__name__}.table_cases: casos por dia
+    * table_cases: casos por dia
         colunas: {table_cases.columns}
 
-    * {__name__}.table_beds: leitos ocupados por dia
+    * table_beds: leitos ocupados por dia
         colunas: {table_beds.columns}
         
-    * {__name__}.table_consolidated: casos e leitos consolidados
+    * table_consolidated: casos e leitos consolidados
         colunas: {table_consolidated.columns}
 
     Operações:
 
-    * {__name__}.plot_graphic(tabela, dias, nome_coluna)
+    * plot_graphic(tabela, dias, nome_coluna)
 
-    * {__name__}.add_moving_avg(tabela, nome_coluna, quantidade_dias)
+    * add_moving_avg(tabela, nome_coluna, quantidade_dias)
 
 """)

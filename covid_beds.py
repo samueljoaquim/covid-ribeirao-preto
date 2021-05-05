@@ -11,7 +11,7 @@ def get_covid_beds_df(url):
     historical = [
         [
           datetime.fromisoformat(k).strftime("%Y-%m-%d"),
-          *reduce(lambda a, b : (a[0]+b[0], a[1]+b[1], f"{(a[1]+b[1])/(a[0]+b[0]):.2%}"), 
+          *reduce(lambda a, b : (a[0]+b[0], a[1]+b[1], (a[1]+b[1])/(a[0]+b[0])*100), 
           [
               (
                   i["intensive_care_unit"]["covid"]["total"], i["intensive_care_unit"]["covid"]["busy"]
