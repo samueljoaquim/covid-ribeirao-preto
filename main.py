@@ -1,19 +1,24 @@
 from covid_cases import get_covid_cases_df
 from covid_beds import get_covid_beds_df
+import matplotlib.pyplot as plt
 
+import numpy as np
 import pandas as pd
 
 URL_CASES="https://ciis.fmrp.usp.br/covid19//wp-content/insideSP/dadosRibeiraoPreto.html"
 URL_BEDS="https://api.leitoscovid.org/dashboard?city=ribeirao-preto"
 
 
-def plot_graphic(table):
-    plt.figure()
-    obitos=table[["Data","Óbitos novos"]].values
-    plt.hist(obitos, bins=50)
-    plt.title('Óbitos por dia')
-
+def plot_graphic(df, days, key):
+    if days:
+        idx = days*-1
+        df = df[idx:]
+    df.plot(0, key, 'line')
     plt.show()
+
+
+def add_moving_avg(df, key, amount):
+    df[f"{key} {amount}d"] = df[[key]].rolling(window=7).mean()
 
 def prepare_tables():
     table_cases = get_covid_cases_df(URL_CASES)
@@ -36,4 +41,11 @@ print(f"""
         
     * {__name__}.table_consolidated: casos e leitos consolidados
         colunas: {table_consolidated.columns}
+
+    Operações:
+
+    * {__name__}.plot_graphic(tabela, dias, nome_coluna)
+
+    * {__name__}.add_moving_avg(tabela, nome_coluna, quantidade_dias)
+
 """)
