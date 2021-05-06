@@ -5,7 +5,7 @@ from functools import reduce
 
 
 
-def get_covid_beds_df(url):
+def obter_leitos_covid(url: str) -> pd.DataFrame:
     response = requests.get(url)
     data = response.json()
     historical = [
